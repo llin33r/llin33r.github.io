@@ -445,6 +445,71 @@
         .slider-image.active {
             opacity: 1;
         }
+        
+        /* Стили для кнопки с деньгами */
+        .money-sticker {
+            position: absolute;
+            font-size: 2em;
+            z-index: 10;
+            animation: moneyFloat 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes moneyFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg) scale(1);
+                opacity: 0.8;
+            }
+            25% { 
+                transform: translateY(-20px) rotate(10deg) scale(1.1);
+                opacity: 1;
+            }
+            50% { 
+                transform: translateY(-10px) rotate(-5deg) scale(1.05);
+                opacity: 0.9;
+            }
+            75% { 
+                transform: translateY(-15px) rotate(5deg) scale(1.08);
+                opacity: 0.95;
+            }
+        }
+        
+        .pulse-money-btn {
+            animation: pulseMoney 2s ease-in-out infinite;
+            position: relative;
+            overflow: visible;
+        }
+        
+        @keyframes pulseMoney {
+            0%, 100% { 
+                transform: scale(1) rotate(2deg);
+                padding: 12px 24px;
+            }
+            50% { 
+                transform: scale(1.05) rotate(-1deg);
+                padding: 12px 30px;
+            }
+        }
+        
+        .money-particle {
+            position: absolute;
+            font-size: 1.5em;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 1000;
+            animation: moneyParticleFloat 2s ease-out forwards;
+        }
+        
+        @keyframes moneyParticleFloat {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg) scale(0);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -630,10 +695,8 @@
                         <div style="color: #ffeb3b; background: #000; display: inline-block; padding: 5px 10px; border-radius: 5px;">
                             ★★★★★
                         </div>
-                        <p style="font-style: italic; margin: 10px 0;">"Поистине исцеляющий и вдохновляющий курс! Заслуживает все 5 звезд)) Очень рада, что такое сокровище досталось даром.
-Наладился режим и питание, проявился смысл жизни! А главное, курс помог ощутить конвульсии во время экстаза, получше всякой ваигры!
-Спасибо, что остаётесь на страже нашего вожделения к русаме аминь"</p>
-                        <p style="font-weight: bold; color: #9c27b0;">— СВЕТЛАНА (69)</p>
+                        <p style="font-style: italic; margin: 10px 0;">"Я не шипперила Русаме 20 лет. Все это время жизнь была серой. После курса я поняла, что упустила!"</p>
+                        <p style="font-weight: bold; color: #9c27b0;">— МАРИЯ (43)</p>
                     </div>
                     
                     <!-- Отзыв 2 -->
@@ -700,11 +763,20 @@
             </section>
 
             <!-- 6. ДОНАТЫ (дополнительное действие) -->
-            <section class="hand-drawn-card rotate-slightly text-center" style="background: #ffebee;">
+            <section class="hand-drawn-card rotate-slightly text-center" style="background: #ffebee; position: relative;">
                 <h2 class="funny-title">ДАЙТЕ НАМ ДЕНЕГ!</h2>
-                <a href="https://boosty.to/l1n3r/donate" target="_blank" class="sticker-btn rotate-slightly-opposite" style="background: #f44336; font-size: 1.3em;">
-                    ИНВЕСТИРОВАТЬ В РУСАМЕ
-                </a>
+                <div style="position: relative; display: inline-block;">
+                    <a href="https://boosty.to/l1n3r/donate" target="_blank" class="sticker-btn rotate-slightly-opposite pulse-money-btn" style="background: #f44336; font-size: 1.3em; position: relative; z-index: 5;" id="donate-btn">
+                        💰 ИНВЕСТИРОВАТЬ В РУСАМЕ
+                    </a>
+                    <!-- Стикеры денег вокруг кнопки -->
+                    <div class="money-sticker" style="top: -20px; left: -30px;">💵</div>
+                    <div class="money-sticker" style="top: -15px; right: -25px;">💶</div>
+                    <div class="money-sticker" style="bottom: -20px; left: -20px;">💷</div>
+                    <div class="money-sticker" style="bottom: -15px; right: -35px;">💴</div>
+                    <div class="money-sticker" style="top: 50%; left: -40px; transform: translateY(-50%);">💰</div>
+                    <div class="money-sticker" style="top: 50%; right: -45px; transform: translateY(-50%);">💸</div>
+                </div>
                 <p style="margin-top: 15px; font-style: italic;"></p>
             </section>
         </main>
@@ -777,6 +849,40 @@
             
             // Запускаем смену картинок каждые 10 секунд
             setInterval(showNextImage, 10000);
+        }
+
+        // ФУНКЦИЯ ДЛЯ СОЗДАНИЯ ДЕНЕЖНЫХ ЧАСТИЦ
+        function createMoneyParticles(element, count = 10) {
+            const moneySymbols = ['💵', '💶', '💷', '💴', '💰', '💸', '💳', '🪙'];
+            
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const money = document.createElement('div');
+                    money.className = 'money-particle';
+                    money.textContent = moneySymbols[Math.floor(Math.random() * moneySymbols.length)];
+                    
+                    const rect = element.getBoundingClientRect();
+                    const x = rect.left + rect.width / 2;
+                    const y = rect.top + rect.height / 2;
+                    
+                    money.style.left = x + 'px';
+                    money.style.top = y + 'px';
+                    
+                    const angle = Math.random() * 360;
+                    const distance = 80 + Math.random() * 80;
+                    
+                    money.style.animation = `moneyParticleFloat 2s ease-out forwards`;
+                    money.style.setProperty('--end-x', Math.cos(angle * Math.PI / 180) * distance + 'px');
+                    money.style.setProperty('--end-y', Math.sin(angle * Math.PI / 180) * distance + 'px');
+                    
+                    document.body.appendChild(money);
+                    
+                    setTimeout(() => {
+                        money.remove();
+                    }, 2000);
+                    
+                }, i * 100);
+            }
         }
 
         // СОЗДАЕМ ЗВЕЗДЫ НА ФОНЕ
@@ -1099,6 +1205,11 @@
 
         document.getElementById('signup-btn-2').addEventListener('click', function(e) {
             createSmileys(this, 20);
+        });
+
+        // ОБРАБОТКА КНОПКИ ДОНАТА
+        document.getElementById('donate-btn').addEventListener('click', function(e) {
+            createMoneyParticles(this, 15);
         });
 
         // ТАЙМЕР ОБРАТНОГО ОТСЧЕТА
