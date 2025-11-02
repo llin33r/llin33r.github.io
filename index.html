@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Все стили остаются точно такими же как в предыдущем коде */
         /* САМЫЕ ПРОСТЫЕ ШРИФТЫ КОТОРЫЕ РАБОТАЮТ ВЕЗДЕ */
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -423,6 +422,29 @@
             background: #4caf50;
             color: white;
         }
+        
+        /* Анимация смены картинок */
+        .image-slider {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1/1;
+        }
+        
+        .slider-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+        
+        .slider-image.active {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -516,13 +538,13 @@
                     </div>
 
                     <div style="flex: 1; min-width: 300px; text-align: center;">
-                        <div style="border: 5px solid #ff4081; border-radius: 20px; padding: 10px; display: inline-block; background: white;">
-                            <img 
-                                src="https://i.ibb.co/cS6TYqWy/IMG-20251102-173438-611.png" 
-                                alt="РУСАМЕ" 
-                                style="max-width: 100%; height: auto; border-radius: 10px; border: 2px solid #000;"
-                                onerror="this.onerror=null; this.src='https://placehold.co/400x400/2196f3/ffffff?text=РУСАМЕ+АРТ&font=comic-sans-ms';"
-                            >
+                        <div style="border: 5px solid #ff4081; border-radius: 20px; padding: 10px; display: inline-block; background: white; max-width: 500px; width: 100%; position: relative;">
+                            <div class="image-slider" id="image-slider">
+                                <img src="https://i.ibb.co/cS6TYqWy/IMG-20251102-173438-611.png" alt="РУСАМЕ 1" class="slider-image active">
+                                <img src="https://i.ibb.co/nMQdLLq6/IMG-20250825-082707-161.jpg" alt="РУСАМЕ 2" class="slider-image">
+                                <img src="https://i.ibb.co/0jj1Vz9G/IMG-20250803-185149-792.jpg" alt="РУСАМЕ 3" class="slider-image">
+                                <img src="https://i.ibb.co/jvfDPr8B/IMG-20251103-004334-436.jpg" alt="РУСАМЕ 4" class="slider-image">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -608,8 +630,10 @@
                         <div style="color: #ffeb3b; background: #000; display: inline-block; padding: 5px 10px; border-radius: 5px;">
                             ★★★★★
                         </div>
-                        <p style="font-style: italic; margin: 10px 0;">"Я не шипперила Русаме 20 лет. Все это время жизнь была серой. После курса я поняла, что упустила!"</p>
-                        <p style="font-weight: bold; color: #9c27b0;">— МАРИЯ (43)</p>
+                        <p style="font-style: italic; margin: 10px 0;">"Поистине исцеляющий и вдохновляющий курс! Заслуживает все 5 звезд)) Очень рада, что такое сокровище досталось даром.
+Наладился режим и питание, проявился смысл жизни! А главное, курс помог ощутить конвульсии во время экстаза, получше всякой ваигры!
+Спасибо, что остаётесь на страже нашего вожделения к русаме аминь"</p>
+                        <p style="font-weight: bold; color: #9c27b0;">— СВЕТЛАНА (69)</p>
                     </div>
                     
                     <!-- Отзыв 2 -->
@@ -626,7 +650,7 @@
                         <div style="color: #ffeb3b; background: #000; display: inline-block; padding: 5px 10px; border-radius: 5px;">
                             ★★★★★
                         </div>
-                        <p style="font-style: italic; margin: 10px 0;">"Заслуженная пять, я снова счаслив жена вернулась ко мне и я завязал с 20 летним алкоголизмом и я снова хочу жить, спасибо вам большое!!! С моей карты списались всё деньги НО НИЧЕГО ВЕДЬ ТЕПЕРЬ Я ПОЖИЗНЕННО ЩАСЛИВ БЛАГОДАРЯ ТОМУ ЧТО ПРОШЛА ЭТОТ КУРС!!! Русаме канон"</p>
+                        <p style="font-style: italic; margin: 10px 0;">"Заслуженная пять, я снова счаслив жена вернулась ко мне и я завязал с 20 летним алкоголизмом и я снова хочу жить, спасибо вам большое!!!!!!!! С моей карты списались всё деньги НО НИЧЕГО ВЕДЬ ТЕПЕРЬ Я ПОЖИЗНЕННО ЩАСЛИВ БЛАГОДАРЯ ТОМУ ЧТО ПРОШЛА ЭТОТ КУРС!!!!!! Русаме канон"</p>
                         <p style="font-weight: bold; color: #9c27b0;">— ЕВКСОИ (16)</p>
                     </div>
 
@@ -734,7 +758,27 @@
     </div>
 
     <script>
-        // Весь JavaScript код остается точно таким же как в предыдущей версии
+        // ФУНКЦИЯ ДЛЯ СМЕНЫ КАРТИНОК
+        function initImageSlider() {
+            const slider = document.getElementById('image-slider');
+            const images = slider.querySelectorAll('.slider-image');
+            let currentIndex = 0;
+            
+            function showNextImage() {
+                // Скрываем текущую картинку
+                images[currentIndex].classList.remove('active');
+                
+                // Переходим к следующей
+                currentIndex = (currentIndex + 1) % images.length;
+                
+                // Показываем новую картинку
+                images[currentIndex].classList.add('active');
+            }
+            
+            // Запускаем смену картинок каждые 10 секунд
+            setInterval(showNextImage, 10000);
+        }
+
         // СОЗДАЕМ ЗВЕЗДЫ НА ФОНЕ
         function createStars() {
             const starsContainer = document.getElementById('stars-container');
@@ -1083,6 +1127,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             createStars();
             startCountdown();
+            initImageSlider(); // Инициализируем слайдер картинок
         });
     </script>
 </body>
