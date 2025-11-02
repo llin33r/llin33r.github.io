@@ -7,9 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+        
         /* Более простые, но все еще выразительные стили */
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Comic Neue', 'Comic Sans MS', cursive, sans-serif;
             background: linear-gradient(45deg, #ffeb3b, #ff9800);
             color: #333;
             margin: 0;
@@ -56,7 +58,7 @@
             cursor: pointer;
             box-shadow: 4px 4px 0 #000;
             transition: all 0.2s;
-            font-family: 'Comic Sans MS', cursive;
+            font-family: 'Comic Neue', 'Comic Sans MS', cursive;
             text-decoration: none;
             display: inline-block;
         }
@@ -68,7 +70,7 @@
         
         /* Заголовки с текстовыми тенями */
         .funny-title {
-            font-family: 'Comic Sans MS', cursive;
+            font-family: 'Comic Neue', 'Comic Sans MS', cursive;
             color: #d50000;
             text-shadow: 3px 3px 0 #ffeb3b;
             margin: 10px 0;
@@ -219,6 +221,10 @@
             max-width: 400px;
             width: 90%;
         }
+
+        .text-center {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -287,7 +293,8 @@
                     </div>
                 </div>
                 
-                <!-- Показатели -->
+                <!-- Показатели - ИСПРАВЛЕННАЯ СТРУКТУРА -->
+                <div class="uneven-grid" style="margin-top: 20px;">
                     <div class="grid-item rotate-slightly-opposite" style="background: #f3e5f5;">
                         <div style="font-size: 1.5em; font-weight: bold; color: #9c27b0;">ВЕЧНО</div>
                         <div>ДЛИТЕЛЬНОСТЬ</div>
@@ -381,11 +388,11 @@
                     <!-- Поля ввода -->
                     <div style="margin-bottom: 20px;">
                         <label for="name" style="display: block; font-weight: bold; margin-bottom: 5px;">ИМЯ</label>
-                        <input type="text" id="name" required style="width: 100%; padding: 10px; border: 2px solid #000; border-radius: 10px; font-family: 'Comic Sans MS', cursive;">
+                        <input type="text" id="name" required style="width: 100%; padding: 10px; border: 2px solid #000; border-radius: 10px; font-family: 'Comic Neue', 'Comic Sans MS', cursive;">
                     </div>
                     <div style="margin-bottom: 20px;">
                         <label for="review-body" style="display: block; font-weight: bold; margin-bottom: 5px;">ТВОЙ ТЕКСТ</label>
-                        <textarea id="review-body" required rows="4" style="width: 100%; padding: 10px; border: 2px solid #000; border-radius: 10px; font-family: 'Comic Sans MS', cursive;"></textarea>
+                        <textarea id="review-body" required rows="4" style="width: 100%; padding: 10px; border: 2px solid #000; border-radius: 10px; font-family: 'Comic Neue', 'Comic Sans MS', cursive;"></textarea>
                     </div>
 
                     <button type="submit" class="sticker-btn" style="width: 100%; font-size: 1.2em;">
