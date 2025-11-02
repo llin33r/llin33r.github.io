@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Все стили остаются точно такими же как в предыдущем коде */
         /* САМЫЕ ПРОСТЫЕ ШРИФТЫ КОТОРЫЕ РАБОТАЮТ ВЕЗДЕ */
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -231,7 +232,7 @@
         .review-4 {
             background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
                         url('https://i.ibb.co/7d4yYwYZ/SUx182-2x-1.webp');
-            background-size: cover;
+            background.size: cover;
             background-position: center;
         }
 
@@ -479,13 +480,14 @@
         <header style="padding: 20px 0; text-align: center;">
             <h1 class="funny-title" style="font-size: 3em; margin: 0;">RUSAME CO представляет</h1>
             <nav style="margin: 20px 0;">
-                <a href="#reviews" style="margin: 0 15px; text-decoration: none; color: #000; font-weight: bold; border-bottom: 2px dashed #ff4081;">ОТЗЫВЫ</a>
+                <a href="#symptoms" style="margin: 0 15px; text-decoration: none; color: #000; font-weight: bold; border-bottom: 2px dashed #ff4081;">СИМПТОМЫ</a>
                 <a href="#staff" style="margin: 0 15px; text-decoration: none; color: #000; font-weight: bold; border-bottom: 2px dashed #ff4081;">КОМАНДА</a>
+                <a href="#reviews" style="margin: 0 15px; text-decoration: none; color: #000; font-weight: bold; border-bottom: 2px dashed #ff4081;">ОТЗЫВЫ</a>
             </nav>
         </header>
 
         <main>
-            <!-- Геройский блок -->
+            <!-- 1. ГЛАВНЫЙ ГЕРОЙ-БЛОК -->
             <section class="hand-drawn-card rotate-slightly">
                 <div style="display: flex; flex-wrap: wrap; gap: 30px; align-items: center;">
                     <div style="flex: 1; min-width: 300px;">
@@ -525,7 +527,7 @@
                     </div>
                 </div>
                 
-                <!-- Показатели - ИСПРАВЛЕННАЯ СЕТКА -->
+                <!-- Показатели -->
                 <div class="uneven-grid" style="margin-top: 20px;">
                     <div class="grid-item rotate-slightly-opposite" style="background: #f3e5f5;">
                         <div style="font-size: 1.5em; font-weight: bold; color: #9c27b0;">ВЕЧНО</div>
@@ -542,8 +544,7 @@
                 </div>
             </section>
 
-            <!-- Остальные секции без изменений -->
-            <!-- Симптомы -->
+            <!-- 2. СИМПТОМЫ (проблема) -->
             <section id="symptoms" class="hand-drawn-card rotate-slightly-opposite" style="background: #ffebee;">
                 <h2 class="funny-title">СИМПТОМАТИКА НЕПРИНЯТИЯ</h2>
                 <ul class="custom-list">
@@ -555,9 +556,50 @@
                     <h3 style="margin: 0; color: #ff4081;">⚠︎ ВНИМАНИЕ:</h3>
                     <p style="font-size: 1.5em; margin: 10px 0 0 0; font-weight: bold;">требуется немедленная коррекция</p>
                 </div>
+
+                <!-- КНОПКА ЗАПИСИ ПОСЛЕ СИМПТОМОВ -->
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="https://t.me/legaILILIL" target="_blank" class="sticker-btn rotate-slightly" style="font-size: 1.3em; background: #2196f3;" id="signup-btn-2">
+                        ☑︎ ИСПРАВИТЬ СИМПТОМЫ БЕСПЛАТНО !!!
+                    </a>
+                </div>
+            </section>
+
+            <!-- 3. КОМАНДА (решение) -->
+            <section id="staff" class="hand-drawn-card rotate-slightly-opposite" style="background: #fff3e0;">
+                <h2 class="funny-title" style="text-align: center;">НАША КРУТАЯ КОМАНДА</h2>
+                
+                <div class="uneven-grid">
+                    <div class="grid-item rotate-slightly text-center">
+                        <div style="font-size: 3em; color: #2196f3;">💻</div>
+                        <h3 style="color: #2196f3; margin: 10px 0;">ЛИНЕР</h3>
+                        <p style="font-weight: bold; margin: 5px 0;">АЙТИ ОТДЕЛ</p>
+                        <div style="background: #ffeb3b; padding: 5px 10px; border-radius: 10px; margin-top: 10px;">
+                            <span style="font-weight: bold; color: #f44336;">4.9 / 5 ⭐</span> 500+ отз на Авито. Разработчик с многолетним стажем. Все решения принимается с помощью гпт
+                        </div>
+                    </div>
+
+                    <div class="grid-item rotate-slightly-opposite text-center">
+                        <div style="font-size: 3em; color: #ff4081;">🎤</div>
+                        <h3 style="color: #ff4081; margin: 10px 0;">ДИНЕР</h3>
+                        <p style="font-weight: bold; margin: 5px 0;">МЕНЕДЖЕР</p>
+                        <div style="background: #ffeb3b; padding: 5px 10px; border-radius: 10px; margin-top: 10px;">
+                            <span style="font-weight: bold; color: #f44336;">5 / 5 ⭐</span> 1000+ отз на Авито. Занимается продвижением популярных художников в кх среде
+                        </div>
+                    </div>
+
+                    <div class="grid-item rotate-slightly text-center">
+                        <div style="font-size: 3em; color: #4caf50;">🎨</div>
+                        <h3 style="color: #4caf50; margin: 10px 0;">ИЛИЛИЛ</h3>
+                        <p style="font-weight: bold; margin: 5px 0;">АРТ ОТДЕЛ</p>
+                        <div style="background: #ffeb3b; padding: 5px 10px; border-radius: 10px; margin-top: 10px;">
+                            <span style="font-weight: bold; color: #f44336;">4.8 / 5 ⭐</span> 100+ отз на Авито. Рисует все арты и оформляет посты
+                        </div>
+                    </div>
+                </div>
             </section>
             
-            <!-- Отзывы -->
+            <!-- 4. ОТЗЫВЫ (доказательства) -->
             <section id="reviews" class="hand-drawn-card rotate-slightly-opposite" style="background: #f3e5f5;">
                 <h2 class="funny-title" style="text-align: center;">ОТЗЫВЫ СЧАСТЛИВЫХ КЛИЕНТОВ</h2>
                 <div class="uneven-grid">
@@ -584,7 +626,7 @@
                         <div style="color: #ffeb3b; background: #000; display: inline-block; padding: 5px 10px; border-radius: 5px;">
                             ★★★★★
                         </div>
-                        <p style="font-style: italic; margin: 10px 0;">"Заслуженная пять, я снова счаслив жена вернулась ко мне и я завязал с 20 летним алкоголизмом и я снова хочу жить, спасибо вам большое!!!!!!!! С моей карты списались всё деньги НО НИЧЕГО ВЕДЬ ТЕПЕРЬ Я ПОЖИЗНЕННО ЩАСЛИВ БЛАГОДАРЯ ТОМУ ЧТО ПРОШЛА ЭТОТ КУРС!!!!!! Русаме канон"</p>
+                        <p style="font-style: italic; margin: 10px 0;">"Заслуженная пять, я снова счаслив жена вернулась ко мне и я завязал с 20 летним алкоголизмом и я снова хочу жить, спасибо вам большое!!! С моей карты списались всё деньги НО НИЧЕГО ВЕДЬ ТЕПЕРЬ Я ПОЖИЗНЕННО ЩАСЛИВ БЛАГОДАРЯ ТОМУ ЧТО ПРОШЛА ЭТОТ КУРС!!! Русаме канон"</p>
                         <p style="font-weight: bold; color: #9c27b0;">— ЕВКСОИ (16)</p>
                     </div>
 
@@ -599,7 +641,7 @@
                 </div>
             </section>
 
-            <!-- Форма отзыва -->
+            <!-- 5. ФОРМА ОТЗЫВА (призыв к действию) -->
             <section class="hand-drawn-card rotate-slightly" style="background: #e8f5e8;">
                 <h2 class="funny-title" style="text-align: center;">ОСТАВЬ СВОЙ ОТЗЫВ</h2>
                 
@@ -633,41 +675,7 @@
                 </form>
             </section>
 
-            <!-- Команда -->
-            <section id="staff" class="hand-drawn-card rotate-slightly-opposite" style="background: #fff3e0;">
-                <h2 class="funny-title" style="text-align: center;">НАША КРУТАЯ КОМАНДА</h2>
-                
-                <div class="uneven-grid">
-                    <div class="grid-item rotate-slightly text-center">
-                        <div style="font-size: 3em; color: #2196f3;">💻</div>
-                        <h3 style="color: #2196f3; margin: 10px 0;">ЛИНЕР</h3>
-                        <p style="font-weight: bold; margin: 5px 0;">АЙТИ ОТДЕЛ</p>
-                        <div style="background: #ffeb3b; padding: 5px 10px; border-radius: 10px; margin-top: 10px;">
-                            <span style="font-weight: bold; color: #f44336;">4.9 / 5 ⭐</span> Разработчик с многолетним стажем. Все решения принимается с помощью гпт
-                        </div>
-                    </div>
-
-                    <div class="grid-item rotate-slightly-opposite text-center">
-                        <div style="font-size: 3em; color: #ff4081;">🎤</div>
-                        <h3 style="color: #ff4081; margin: 10px 0;">ДИНЕР</h3>
-                        <p style="font-weight: bold; margin: 5px 0;">МЕНЕДЖЕР</p>
-                        <div style="background: #ffeb3b; padding: 5px 10px; border-radius: 10px; margin-top: 10px;">
-                            <span style="font-weight: bold; color: #f44336;">5 / 5 ⭐</span> Занимается продвижением популярных художников в кх среде
-                        </div>
-                    </div>
-
-                    <div class="grid-item rotate-slightly text-center">
-                        <div style="font-size: 3em; color: #4caf50;">🎨</div>
-                        <h3 style="color: #4caf50; margin: 10px 0;">ИЛИЛИЛ</h3>
-                        <p style="font-weight: bold; margin: 5px 0;">АРТ ОТДЕЛ</p>
-                        <div style="background: #ffeb3b; padding: 5px 10px; border-radius: 10px; margin-top: 10px;">
-                            <span style="font-weight: bold; color: #f44336;">4.8 / 5 ⭐</span> Рисует все арты и оформляет посты
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Донаты -->
+            <!-- 6. ДОНАТЫ (дополнительное действие) -->
             <section class="hand-drawn-card rotate-slightly text-center" style="background: #ffebee;">
                 <h2 class="funny-title">ДАЙТЕ НАМ ДЕНЕГ!</h2>
                 <a href="https://boosty.to/l1n3r/donate" target="_blank" class="sticker-btn rotate-slightly-opposite" style="background: #f44336; font-size: 1.3em;">
@@ -726,25 +734,23 @@
     </div>
 
     <script>
+        // Весь JavaScript код остается точно таким же как в предыдущей версии
         // СОЗДАЕМ ЗВЕЗДЫ НА ФОНЕ
         function createStars() {
             const starsContainer = document.getElementById('stars-container');
-            const starCount = 50; // Количество звезд
+            const starCount = 50;
             
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 
-                // Случайный размер от 3 до 8px
                 const size = Math.random() * 5 + 3;
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
                 
-                // Случайная позиция
                 star.style.left = Math.random() * 100 + 'vw';
                 star.style.top = Math.random() * 100 + 'vh';
                 
-                // Случайная задержка анимации
                 star.style.animationDelay = Math.random() * 3 + 's';
                 
                 starsContainer.appendChild(star);
@@ -761,7 +767,6 @@
                     smiley.className = 'smiley-particle';
                     smiley.textContent = smileys[Math.floor(Math.random() * smileys.length)];
                     
-                    // Позиция относительно кнопки
                     const rect = element.getBoundingClientRect();
                     const x = rect.left + rect.width / 2;
                     const y = rect.top + rect.height / 2;
@@ -769,7 +774,6 @@
                     smiley.style.left = x + 'px';
                     smiley.style.top = y + 'px';
                     
-                    // Случайное направление
                     const angle = Math.random() * 360;
                     const distance = 100 + Math.random() * 100;
                     
@@ -779,12 +783,11 @@
                     
                     document.body.appendChild(smiley);
                     
-                    // Удаляем смайлик после анимации
                     setTimeout(() => {
                         smiley.remove();
                     }, 1500);
                     
-                }, i * 50); // Задержка между созданием смайликов
+                }, i * 50);
             }
         }
 
@@ -802,7 +805,6 @@
             
             element.appendChild(particle);
             
-            // Удаляем частицу после анимации
             setTimeout(() => {
                 particle.remove();
             }, 1000);
@@ -810,19 +812,15 @@
 
         // Функция обновления счетчиков
         function updateCounters() {
-            // Генерируем случайные приросты
-            const passedIncrement = Math.floor(Math.random() * 3) + 1; // +1 до +3
-            const todayIncrement = Math.floor(Math.random() * 2) + 1; // +1 до +2
+            const passedIncrement = Math.floor(Math.random() * 3) + 1;
+            const todayIncrement = Math.floor(Math.random() * 2) + 1;
             
-            // Обновляем значения
             passedCount += passedIncrement;
             todayCount += todayIncrement;
             
-            // Обновляем отображение (без плюса в конце)
             document.getElementById('passed-count').textContent = passedCount.toLocaleString('ru-RU');
             document.getElementById('today-count').textContent = todayCount;
             
-            // Создаем частицы
             const passedElement = document.getElementById('passed-count').parentElement;
             const todayElement = document.getElementById('today-count').parentElement;
             
@@ -880,7 +878,6 @@
 
         function hideConfirmModal() {
             document.getElementById('confirm-modal').style.display = 'none';
-            // Автоматически ставим 5 звезд при нажатии "Исправить"
             ratingInput.value = 5;
             stars.forEach(star => {
                 const starRating = parseInt(star.getAttribute('data-rating'));
@@ -893,7 +890,6 @@
 
         function handleConfirmYes() {
             hideConfirmModal();
-            // Показываем фото и надпись на черном фоне
             const overlay = document.createElement('div');
             overlay.style.position = 'fixed';
             overlay.style.top = '0';
@@ -941,10 +937,8 @@
             document.body.style.background = '#000';
             scrimer.style.display = 'flex';
             
-            // Создаем эффект капель крови
             createBloodDrips();
             
-            // Вибрация (если поддерживается)
             if (navigator.vibrate) {
                 navigator.vibrate([1000, 500, 1000]);
             }
@@ -960,7 +954,6 @@
                     drip.style.animationDelay = Math.random() * 2 + 's';
                     scrimer.appendChild(drip);
                     
-                    // Удаляем каплю после анимации
                     setTimeout(() => {
                         drip.remove();
                     }, 3000);
@@ -973,14 +966,12 @@
             document.body.style.background = 'linear-gradient(45deg, #ffeb3b, #ff9800)';
             scrimer.style.display = 'none';
             
-            // Очищаем все капли
             const drips = document.querySelectorAll('.blood-drip');
             drips.forEach(drip => drip.remove());
         }
 
         function fixRating() {
             hideScrimer();
-            // Автоматически ставим 5 звезд
             ratingInput.value = 5;
             stars.forEach(star => {
                 const starRating = parseInt(star.getAttribute('data-rating'));
@@ -1042,11 +1033,8 @@
             const rating = parseInt(document.getElementById('rating-value').value);
             
             if (rating === 5) {
-                // Успешная отправка
                 showModal('success-modal');
-                // Очищаем форму
                 this.reset();
-                // Сбрасываем звезды к 5
                 ratingInput.value = 5;
                 stars.forEach(star => {
                     const starRating = parseInt(star.getAttribute('data-rating'));
@@ -1056,20 +1044,22 @@
                     }
                 });
             } else {
-                // Показываем простую плашку подтверждения вместо скримера
                 showConfirmModal();
             }
         });
 
-        // ОБРАБОТКА КНОПКИ ЗАПИСИ
+        // ОБРАБОТКА КНОПКИ ЗАПИСИ (обеих кнопок)
         document.getElementById('signup-btn').addEventListener('click', function(e) {
-            // Создаем смайлики при клике на кнопку записи
             createSmileys(this, 20);
         });
 
-        // ТАЙМЕР ОБРАТНОГО ОТСЧЕТА - сбрасывается при каждом обновлении страницы
+        document.getElementById('signup-btn-2').addEventListener('click', function(e) {
+            createSmileys(this, 20);
+        });
+
+        // ТАЙМЕР ОБРАТНОГО ОТСЧЕТА
         function startCountdown() {
-            let timer = (2 * 60 * 60) + (59 * 60) + 59; // 2 часа 59 минут 59 секунд
+            let timer = (2 * 60 * 60) + (59 * 60) + 59;
             const displayEl = document.getElementById('countdown-timer');
             const discountTimerEl = document.getElementById('discount-timer');
 
@@ -1084,7 +1074,6 @@
 
                 if (--timer < 0) {
                     clearInterval(interval);
-                    // Когда таймер доходит до 0, перезапускаем его
                     startCountdown();
                 }
             }, 1000);
@@ -1092,10 +1081,7 @@
 
         // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
         document.addEventListener('DOMContentLoaded', function() {
-            // Создаем звезды
             createStars();
-            
-            // Запускаем таймер
             startCountdown();
         });
     </script>
