@@ -805,6 +805,52 @@
             box-shadow: 2px 2px 0 #d50000; 
             transform: translate(1px, 1px);
         }
+        
+        /* Стили для FAQ */
+        .faq-item {
+            margin-bottom: 15px;
+            border: 2px solid #000;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fff9c4;
+        }
+        
+        .faq-question {
+            padding: 15px;
+            background: #ff4081;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #000;
+        }
+        
+        .faq-question:hover {
+            background: #f50057;
+        }
+        
+        .faq-answer {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            background: white;
+        }
+        
+        .faq-answer.active {
+            padding: 15px;
+            max-height: 500px;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-icon.rotated {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body>
@@ -1100,6 +1146,62 @@
                 <div class="text-center">
                     <p style="font-weight: bold; color: #ff4081;">ГРАФИК:</p>
                     <p>пн-вт: 12 – 13 АМ / пт-сб: 23 – 25 ПМ</p>
+                </div>
+            </div>
+            
+            <!-- ДОБАВЛЕННЫЙ БЛОК FAQ -->
+            <div class="hand-drawn-card" style="margin-top: 30px; background: #fff9c4; color: #333;">
+                <h2 class="funny-title" style="text-align: center; margin-bottom: 20px;">FAQ - ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ</h2>
+                
+                <div class="faq-container">
+                    <!-- Вопрос 1 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>💻 Могу ли я заказать персональный арт у ЛИНЕРА?</span>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Да, конечно! Дорогой Пользователь, ЛИНЕР принимает неограниченное количество заказов. Для этого нужно:</p>
+                            <ol>
+                                <li>1. Записаться на курс коррекции</li>
+                                <li>2. Придумать идею для арта</li>
+                                <li>3. Написать в личные сообщения: <a href="https://t.me/llilinnn" target="_blank" style="color: #ff4081; font-weight: bold;">https://t.me/llilinnn</a> — "Здравствуйте! Хочу заказать Арт"</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <!-- Вопрос 2 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>🎨 Где найти канонные арты РУСАМЕ?</span>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>В нашем официальном Telegram-канале <a href="https://t.me/legaILILIL" target="_blank" style="color: #ff4081; font-weight: bold;">https://t.me/legaILILIL</a> — ежедневные порции канона: арт контент, мини сценки, анкеты и многое другое!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Вопрос 3 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>📈 РУСАМЕ еще актуально?</span>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>А дыхание актуально? РУСАМЕ - это навсегда! С каждым днем наша армия растет.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Вопрос 4 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>🤝 Как присоединиться к сообществу РУСАМЕ?</span>
+                            <span class="faq-icon">▼</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Пройти курс коррекции → создать свой канал, посвященный РУСАМЕ → начинать творить!</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1995,12 +2097,37 @@
             }, 10000);
         });
 
+        // ФУНКЦИЯ ДЛЯ FAQ (АККОРДЕОНА)
+        function initFAQ() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('.faq-icon');
+                    
+                    // Закрываем все другие открытые ответы
+                    document.querySelectorAll('.faq-answer.active').forEach(activeAnswer => {
+                        if (activeAnswer !== answer) {
+                            activeAnswer.classList.remove('active');
+                            activeAnswer.previousElementSibling.querySelector('.faq-icon').classList.remove('rotated');
+                        }
+                    });
+                    
+                    // Переключаем текущий ответ
+                    answer.classList.toggle('active');
+                    icon.classList.toggle('rotated');
+                });
+            });
+        }
+
         // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
         document.addEventListener('DOMContentLoaded', function() {
             createStars();
             startCountdown();
             initImageSlider(); // Инициализируем слайдер картинок
             updateDayCounter(); // Обновляем счетчик дней при загрузке
+            initFAQ(); // Инициализируем FAQ аккордеон
         });
     </script>
 </body>
