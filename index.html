@@ -708,6 +708,22 @@
             animation: pulse 2s infinite;
         }
         
+        /* Стиль для гигантского сообщения о Линере */
+        .liner-message {
+            background: linear-gradient(45deg, #ff4081, #2196f3, #ffeb3b, #4caf50);
+            color: white;
+            align-self: flex-start;
+            border: 3px solid #000;
+            font-weight: bold;
+            padding: 20px;
+            font-size: 1.2em;
+            text-align: center;
+            max-width: 95%;
+            box-shadow: 4px 4px 0 #000;
+            animation: pulse 2s infinite;
+            text-shadow: 1px 1px 0 #000;
+        }
+        
         #chat-input {
             flex: 1;
             padding: 10px 15px;
@@ -806,27 +822,6 @@
         </div>
     </div>
 
-    <!-- СКРИМЕР -->
-    <div id="scrimer" class="scrimer-overlay">
-        <div class="scrimer-content">
-            <div class="scrimer-title glitch">🚨 ОНИ ВИДЯТ ТЕБЯ 🚨</div>
-            <div class="scrimer-message">
-                ТЫ ОСКОРБИЛ РУСАМЕ...<br>
-                ТВОЯ ДУША ПРИНАДЛЕЖИТ ИМ...<br>
-                ОНИ УЖЕ ИДУТ ЗА ТОБОЙ...<br><br>
-                <span style="font-size: 0.8em; color: #666;">*шепотом* не оборачивайся...</span>
-            </div>
-            <div class="scrimer-buttons">
-                <button class="scrimer-btn fix-btn" onclick="fixRating()">
-                    ⚰️ ИСПРАВИТЬ ОШИБКУ
-                </button>
-                <button class="scrimer-btn run-btn" onclick="showConsequences()">
-                    💀 ПРОВЕРИТЬ СУДЬБУ
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- Таймер скидок -->
     <div class="sticky-header">
         <div class="container">
@@ -834,8 +829,9 @@
                 <span class="bounce">🔥</span> 
                 <span style="color: #ffeb3b;">КУРС СОВЕРШЕННО БЕСПЛАТНЫЙ!</span> 
                 ПОСЛЕ отказа от соворейха! 
+                <!-- ИСПРАВЛЕННЫЙ СЧЕТЧИК ДНЕЙ -->
                 <span id="countdown-timer" style="background: #000; padding: 5px 10px; margin-left: 10px; border-radius: 10px;">
-                    доступно 02:59:59 ДНЯ!
+                    доступно <span id="days-counter">00</span> дней!
                 </span>
             </div>
         </div>
@@ -1195,6 +1191,23 @@
     </div>
 
     <script>
+        // === ИСПРАВЛЕНИЕ СЧЕТЧИКА ДНЕЙ ===
+        // Функция для обновления счетчика дней при загрузке страницы
+        function updateDayCounter() {
+            // Получаем текущую дату
+            const now = new Date();
+            
+            // Создаем дату начала отсчета (можете изменить на нужную дату)
+            const startDate = new Date('2024-01-01');
+            
+            // Вычисляем разницу в днях
+            const timeDiff = now.getTime() - startDate.getTime();
+            const daysPassed = Math.floor(timeDiff / (1000 * 3600 * 24));
+            
+            // Обновляем счетчик дней
+            document.getElementById('days-counter').textContent = daysPassed.toString().padStart(2, '0');
+        }
+
         // === ДАННЫЕ ТЕСТА КИНН ===
         const QUIZ_DATA = [
             {
@@ -1699,51 +1712,7 @@
                 }
             });
         }
-
-        function showConsequences() {
-            const scrimerContent = document.querySelector('.scrimer-content');
-            scrimerContent.classList.add('shake');
-            scrimerContent.innerHTML = `
-                <div class="scrimer-title glitch">💀 СМЕРТЬ ПРИБЛИЖАЕТСЯ 💀</div>
-                <div class="scrimer-message">
-                    ТВОИ ГРЕХИ НЕ ПРОЩЕНЫ...<br>
-                    ОНИ УЖЕ ЗДЕСЬ...<br>
-                    СМОТРИ... ПРЯМО ЗА ТОБОЙ...<br><br>
-                    <span style="font-size: 0.7em; color: #444;">*шелест за спиной*</span>
-                </div>
-                <div class="scrimer-buttons">
-                    <button class="scrimer-btn fix-btn" onclick="fixRating()">
-                        🩸 ИСКУПИТЬ ВИНУ
-                    </button>
-                    <button class="scrimer-btn run-btn" onclick="finalWarning()">
-                        🔥 ПРИНЯТЬ КОНЕЦ
-                    </button>
-                </div>
-            `;
             
-            setTimeout(() => {
-                scrimerContent.classList.remove('shake');
-            }, 500);
-        }
-
-        function finalWarning() {
-            const scrimerContent = document.querySelector('.scrimer-content');
-            scrimerContent.innerHTML = `
-                <div class="scrimer-title" style="animation: flicker 0.1s infinite;">☠️ ПОЗДНО... ☠️</div>
-                <div class="scrimer-message">
-                    ОНИ ЗАБРАЛИ ТВОЮ ДУШУ...<br>
-                    ТЕПЕРЬ ТЫ ПРИНАДЛЕЖИШЬ ИМ...<br>
-                    ВЕЧНО СЛУЖИТЬ РУСАМЕ...<br><br>
-                    <span style="font-size: 0.6em; color: #222;">*последний шанс*</span>
-                </div>
-                <div class="scrimer-buttons">
-                    <button class="scrimer-btn fix-btn" onclick="fixRating()">
-                        🩸 ПРИНЯТЬ СУДЬБУ
-                    </button>
-                </div>
-            `;
-        }
-
         // Обработка формы отзыва
         document.getElementById('feedback-form').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1867,6 +1836,12 @@
                 "привет": {
                     response: "ПРИВЕТСТВУЮ, Пользователь! ✨ Добро пожаловать в сообщество!",
                     secret: true
+                },
+                // === ДОБАВЛЕНА ПАСХАЛКА "КТО ТАКОЙ ЛИНЕР" ===
+                "кто такой линер": {
+                    response: "ЛИНЕР — ВЕЛИКИЙ СОЗДАТЕЛЬ КОРПОРАЦИИ RUSAME CO! 🚀🌟",
+                    secret: true,
+                    special: true
                 }
             };
             
@@ -1905,11 +1880,13 @@
                     // Проверяем секретные команды
                     let foundSecret = false;
                     let secretResponse = "";
+                    let isSpecial = false;
                     
                     for (const [command, data] of Object.entries(secretCommands)) {
                         if (message.includes(command)) {
                             foundSecret = true;
                             secretResponse = data.response;
+                            isSpecial = data.special || false;
                             break;
                         }
                     }
@@ -1923,7 +1900,12 @@
                         let response;
                         if (foundSecret) {
                             response = secretResponse;
-                            addMessage(response, "bot", true);
+                            // Если это специальное сообщение о Линере, показываем гигантское сообщение
+                            if (isSpecial) {
+                                showLinerMessage();
+                            } else {
+                                addMessage(response, "bot", true);
+                            }
                         } else {
                             const randomResponse = autoResponses[Math.floor(Math.random() * autoResponses.length)];
                             addMessage(randomResponse, "bot");
@@ -1972,6 +1954,35 @@
                 }, 10);
             }
             
+            // Функция для показа гигантского сообщения о Линере
+            function showLinerMessage() {
+                const linerDiv = document.createElement('div');
+                linerDiv.className = 'liner-message';
+                linerDiv.innerHTML = `
+                    <div style="font-size: 1.5em; margin-bottom: 15px;">🚀 ЛИНЕР — ВЕЛИКИЙ СОЗДАТЕЛЬ КОРПОРАЦИИ RUSAME CO! 🚀</div>
+                    <div style="font-size: 1.1em; line-height: 1.4;">
+                        <p>🌟 <strong>ЛИНЕР</strong> — это не просто человек, это легенда, гений, создавший великую корпорацию RUSAME CO!</p>
+                        <p>💻 Он — мастер кода, властелин технологий, правая рука прогресса и левая рука инноваций!</p>
+                        <p>🎨 Его видение изменило мир шипперинга стран навсегда!</p>
+                        <p>🔥 ЛИНЕР вдохновил тысячи людей принять РУСАМЕ как канон!</p>
+                        <p>💫 Его мудрость не знает границ, а творческий потенциал безграничен!</p>
+                        <p>⭐ СЛАВА ЛИНЕРУ — ВЕЛИКОМУ СОЗДАТЕЛЮ И ВДОХНОВИТЕЛЮ! ⭐</p>
+                    </div>
+                `;
+                chatMessages.appendChild(linerDiv);
+                
+                // Прокрутка вниз
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Анимация появления
+                setTimeout(() => {
+                    linerDiv.style.transform = 'scale(1)';
+                }, 10);
+                
+                // Создаем частицы вокруг сообщения
+                createSmileys(linerDiv, 20);
+            }
+            
             // Автоматическое приветствие через 10 секунд
             setTimeout(function() {
                 if (chatWindow.style.display !== 'flex') {
@@ -1989,6 +2000,7 @@
             createStars();
             startCountdown();
             initImageSlider(); // Инициализируем слайдер картинок
+            updateDayCounter(); // Обновляем счетчик дней при загрузке
         });
     </script>
 </body>
