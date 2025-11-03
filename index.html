@@ -600,6 +600,165 @@
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+        
+        /* Стили для чата поддержки */
+        #support-chat {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        #chat-button {
+            background: #ff4081;
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 #000;
+            border: 3px solid #000;
+            position: relative;
+            overflow: visible;
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+        }
+        
+        #chat-button:hover {
+            transform: rotate(-5deg) scale(1.1);
+        }
+        
+        #chat-window {
+            display: none;
+            width: 350px;
+            height: 450px;
+            background: #fff9c4;
+            border: 3px solid #000;
+            border-radius: 15px;
+            box-shadow: 8px 8px 0 #000;
+            position: absolute;
+            bottom: 85px;
+            right: 0;
+            flex-direction: column;
+            position: relative;
+            z-index: 1001;
+        }
+        
+        #chat-window::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px dashed #ff4081;
+            border-radius: 18px;
+            pointer-events: none;
+        }
+        
+        #chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 249, 196, 0.9);
+        }
+        
+        .chat-message {
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 85%;
+            word-wrap: break-word;
+            box-shadow: 2px 2px 0 #000;
+            position: relative;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .user-message {
+            background: #ff4081;
+            color: white;
+            align-self: flex-end;
+            border: 2px solid #000;
+            text-shadow: 1px 1px 0 #000;
+        }
+        
+        .bot-message {
+            background: #fff;
+            color: #333;
+            align-self: flex-start;
+            border: 2px solid #000;
+            font-weight: bold;
+        }
+        
+        #chat-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 2px solid #000;
+            border-radius: 25px 0 0 25px;
+            outline: none;
+            font-family: Arial, Helvetica, sans-serif;
+            background: white;
+        }
+        
+        #send-message {
+            background: #ff4081;
+            color: white;
+            border: 2px solid #000;
+            border-left: none;
+            border-radius: 0 25px 25px 0;
+            padding: 0 20px;
+            cursor: pointer;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        #typing-indicator {
+            align-self: flex-start;
+        }
+        
+        /* Красный кружок уведомления */
+        .notification-dot {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            background: #f44336;
+            border-radius: 50%;
+            border: 2px solid #000;
+            animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            z-index: 1002;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+            }
+            70% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 10px rgba(244, 67, 54, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -660,6 +819,7 @@
                 <a href="#symptoms" style="margin: 0 15px; text-decoration: none; color: #000; font-weight: bold; border-bottom: 2px dashed #ff4081;">СИМПТОМЫ</a>
                 <a href="#staff" style="margin: 0 15px; text-decoration: none; color: #000; font-weight: bold; border-bottom: 2px dashed #ff4081;">КОМАНДА</a>
                 <a href="#reviews" style="margin: 0 15px; text-decoration: none; color: #000; font-weight: bold; border-bottom: 2px dashed #ff4081;">ОТЗЫВЫ</a>
+                <a href="#donate" style="margin: 0 15px; text-decoration: none; color: #000; font-weight: bold; border-bottom: 2px dashed #ff4081;">ИНВЕСТИРОВАТЬ</a>
             </nav>
         </header>
 
@@ -847,7 +1007,7 @@
             </section>
 
             <!-- 6. ДОНАТЫ (дополнительное действие) -->
-            <section class="hand-drawn-card rotate-slightly text-center" style="background: #ffebee; position: relative;">
+            <section id="donate" class="hand-drawn-card rotate-slightly text-center" style="background: #ffebee; position: relative;">
                 <h2 class="funny-title">ДАЙТЕ НАМ ДЕНЕГ!</h2>
                 <div style="position: relative; display: inline-block;">
                     <a href="https://boosty.to/l1n3r/donate" target="_blank" class="sticker-btn rotate-slightly-opposite pulse-money-btn" style="background: #f44336; font-size: 1.3em; position: relative; z-index: 5;" id="donate-btn">
@@ -927,6 +1087,49 @@
             <button onclick="closeModal('error-modal')" class="sticker-btn" style="background: #f44336;">
                 ИСПРАВИТЬ
             </button>
+        </div>
+    </div>
+
+    <!-- Чат поддержки RUSAME CO -->
+    <div id="support-chat">
+        <!-- Кнопка чата -->
+        <div id="chat-button" class="rotate-slightly">
+            <i class="fas fa-comment" style="font-size: 28px;"></i>
+            <!-- Анимированный элемент -->
+            <div style="position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border: 2px dashed #ffeb3b; border-radius: 50%; pointer-events: none;"></div>
+            <!-- Красный кружок уведомления -->
+            <div class="notification-dot" id="notification-dot">!</div>
+        </div>
+        
+        <!-- Окно чата -->
+        <div id="chat-window" style="display: none;">
+            <!-- Заголовок чата -->
+            <div style="background: #ff4081; color: white; padding: 12px; border-radius: 12px 12px 0 0; text-align: center; font-weight: bold; border-bottom: 3px solid #000; position: relative; z-index: 2;">
+                <span style="text-shadow: 1px 1px 0 #000;">ПОДДЕРЖКА RUSAME CO</span>
+                <span id="close-chat" style="position: absolute; right: 15px; cursor: pointer; font-weight: bold; font-size: 1.2em;">✕</span>
+            </div>
+            
+            <!-- Область сообщений -->
+            <div id="chat-messages">
+                <!-- Приветственное сообщение -->
+                <div style="text-align: center; padding: 10px; background: #000; color: #ffeb3b; border-radius: 10px; font-size: 0.9em; border: 2px dashed #ff4081;">
+                    <strong>ДОБРО ПОЖАЛОВАТЬ В ПОДДЕРЖКУ!</strong><br>
+                    Задайте вопрос о РУСАМЕ
+                </div>
+            </div>
+            
+            <!-- Поле ввода -->
+            <div style="padding: 15px; border-top: 3px solid #000; position: relative; z-index: 2; background: #fff9c4;">
+                <div style="display: flex; gap: 5px;">
+                    <input type="text" id="chat-input" placeholder="Напишите сообщение..." style="flex: 1; padding: 10px 15px; border: 2px solid #000; border-radius: 25px 0 0 25px; outline: none; font-family: Arial, Helvetica, sans-serif; background: white;">
+                    <button id="send-message" style="background: #ff4081; color: white; border: 2px solid #000; border-left: none; border-radius: 0 25px 25px 0; padding: 0 20px; cursor: pointer; font-weight: bold; position: relative;">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div style="text-align: center; margin-top: 8px; font-size: 0.8em; color: #666;">
+                    Автоответчик • Всегда онлайн
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1334,6 +1537,119 @@
                 }
             }, 1000);
         }
+
+        // ФУНКЦИИ ДЛЯ ЧАТА ПОДДЕРЖКИ
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatButton = document.getElementById('chat-button');
+            const chatWindow = document.getElementById('chat-window');
+            const closeChat = document.getElementById('close-chat');
+            const chatMessages = document.getElementById('chat-messages');
+            const chatInput = document.getElementById('chat-input');
+            const sendButton = document.getElementById('send-message');
+            const notificationDot = document.getElementById('notification-dot');
+            
+            // Обновленные автоматические ответы чата
+            const autoResponses = [
+                "РУСАМЕ — это канон! Прими истину!",
+                "Запишись на курс и обрети просветление!",
+                "Любая проблема решится! Прими РУСАМЕ!",
+                "Откажись от соверейха и стань свободным! 🕊",
+                "Наш курс совершенно БЕСПЛАТНЫЙ! Ты уже записался?",
+                "РУСАМЕ — это не просто шип, это состояние души!",
+                "Присоединяйся к нашему сообществу и открой для себя истину!",
+                "Ты уже оставил отзыв? Русамы заслуживают только 5 звезд! даже не думай о том, чтобы ставить меньше. Иначе...",
+                "Инвестируй в РУСАМЕ — это выгодно и духовно!",
+                "Видишь симптомы непринятия русаме? Срочно запишись на курс! 🚨"
+            ];
+            
+            // Открытие/закрытие чата
+            chatButton.addEventListener('click', function() {
+                chatWindow.style.display = 'flex';
+                // Скрываем уведомление при открытии чата
+                notificationDot.style.display = 'none';
+                // Добавляем приветственное сообщение только при первом открытии
+                if (chatMessages.children.length <= 1) {
+                    setTimeout(function() {
+                        addMessage("Приветствую, искатель истины! Я бот поддержки RUSAME CO. Задай мне любой вопрос о РУСАМЕ!", "bot");
+                    }, 500);
+                }
+            });
+            
+            closeChat.addEventListener('click', function() {
+                chatWindow.style.display = 'none';
+            });
+            
+            // Отправка сообщения
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    addMessage(message, "user");
+                    chatInput.value = '';
+                    
+                    // Показываем индикатор набора сообщения
+                    const typingIndicator = document.createElement('div');
+                    typingIndicator.id = 'typing-indicator';
+                    typingIndicator.innerHTML = '<div style="display: inline-block; padding: 8px 12px; background: #fff; border: 2px solid #000; border-radius: 15px; align-self: flex-start;"><i class="fas fa-ellipsis-h"></i> Бот печатает...</div>';
+                    typingIndicator.style.alignSelf = 'flex-start';
+                    chatMessages.appendChild(typingIndicator);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    // Автоматический ответ через 1-3 секунды
+                    setTimeout(function() {
+                        // Убираем индикатор набора
+                        const indicator = document.getElementById('typing-indicator');
+                        if (indicator) indicator.remove();
+                        
+                        const randomResponse = autoResponses[Math.floor(Math.random() * autoResponses.length)];
+                        addMessage(randomResponse, "bot");
+                        
+                        // Особое поведение для сообщения про отзывы
+                        if (randomResponse.includes("Ты уже оставил отзыв?")) {
+                            setTimeout(function() {
+                                addMessage("РУСАМЕ — это канон! Прими истину!", "bot");
+                            }, 1000);
+                        }
+                    }, 1000 + Math.random() * 2000);
+                }
+            }
+            
+            sendButton.addEventListener('click', sendMessage);
+            
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // Добавление сообщения в чат
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'chat-message';
+                messageDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+                
+                messageDiv.textContent = text;
+                chatMessages.appendChild(messageDiv);
+                
+                // Прокрутка вниз
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Анимация появления
+                setTimeout(() => {
+                    messageDiv.style.transform = 'scale(1)';
+                }, 10);
+            }
+            
+            // Автоматическое приветствие через 10 секунд
+            setTimeout(function() {
+                if (chatWindow.style.display !== 'flex') {
+                    // Анимируем кнопку чата
+                    chatButton.style.animation = 'bounce 2s infinite';
+                    setTimeout(() => {
+                        chatButton.style.animation = '';
+                    }, 6000);
+                }
+            }, 10000);
+        });
 
         // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ
         document.addEventListener('DOMContentLoaded', function() {
